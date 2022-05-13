@@ -1,8 +1,6 @@
 import argparse
 from timeit import default_timer as timer
 mylist = []
-
-
 def bubble_sort(mylist):
     start = timer()
     length = len(mylist)
