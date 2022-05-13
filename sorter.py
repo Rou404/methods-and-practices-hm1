@@ -1,6 +1,5 @@
 import argparse
 from timeit import default_timer as timer
-
 mylist = []
 
 
@@ -45,36 +44,34 @@ def insertion_sort(mylist):
     return end - start
 
 
-def merge_sort(mylist):
-    if len(mylist) > 1:
-        mid = len(mylist) // 2
-        left = mylist[:mid]
-        right = mylist[mid:]
-        merge_sort(left)
-        merge_sort(right)
+def mergeSort(arr):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+        L = arr[:mid]
+        R = arr[mid:]
+        mergeSort(L)
+        mergeSort(R)
         i = j = k = 0
-        while i < len(left) and j < len(right):
-            if left[i] < right[j]:
-                mylist[k] = left[i]
+        while i < len(L) and j < len(R):
+            if L[i] < R[j]:
+                arr[k] = L[i]
                 i += 1
             else:
-                mylist[k] = right[j]
+                arr[k] = R[j]
                 j += 1
             k += 1
-
-        while i < len(left):
-            mylist[k] = left[i]
+        while i < len(L):
+            arr[k] = L[i]
             i += 1
-            k += 10.0
-
-        while j < len(right):
-            mylist[k] = right[j]
+            k += 1
+        while j < len(R):
+            arr[k] = R[j]
             j += 1
             k += 1
 
 def merge_sort_timer(mylist):
     start = timer()
-    merge_sort(mylist)
+    mergeSort(mylist)
     end = timer()
     return end - start
 
@@ -174,7 +171,6 @@ def quick_sort(mylist, low, high):
     end = timer()
     return end - start
 
-
 function_map = {
     "bubble": bubble_sort,
     "selection": selection_sort,
@@ -205,20 +201,21 @@ if getattr(args, "list"):
 elif getattr(args, "command") == "all":
     j = open("Lists")
     mylist = [int(x) for x in j.readline().split(" ")]
+    print(len(mylist))
     copy = [x for x in mylist]
-    print(bubble_sort(mylist))
+    print("Bubble: ",bubble_sort(mylist))
     mylist = [x for x in copy]
-    print(insertion_sort(mylist))
+    print("Insertion:",insertion_sort(mylist))
     mylist = [x for x in copy]
-    print(selection_sort(mylist))
+    print("Selection: ",selection_sort(mylist))
     mylist = [x for x in copy]
-    print(radix_sort(mylist))
+    print("Radix: ",radix_sort(mylist))
     mylist = [x for x in copy]
-    print(counting_sort(mylist))
+    print("Counting:",counting_sort(mylist))
     mylist = [x for x in copy]
-    print(merge_sort_timer(mylist))
+    print("Merge:",merge_sort_timer(mylist))
     mylist = [x for x in copy]
-    print(quick_sort(mylist, 0, len(mylist) - 1))
+    print("Quick:",quick_sort(mylist, 0, len(mylist) - 1))
     mylist = [x for x in copy]
-    print(heap_sort(mylist))
+    print("Heap:",heap_sort(mylist))
     mylist = [x for x in copy]
